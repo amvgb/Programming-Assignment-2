@@ -1,0 +1,26 @@
+MakeCacheInverseMatrix <- function(x = matrix()){
+	InvMat <- NULL
+	place <- function(y){
+		x <<- y
+		InvMat <<- NULL
+	}
+	acquire <- function() {x}
+	placeInverseMatrix <- function(inverse) {InvMat <<- inverse}
+	acquireInverseMatrix <- function() {InvMat}
+	list(place = place,
+		acquire = acquire,
+		placeInverseMatrix = placeInverseMatrix,
+		acquireInverseMatrix = acquireInverseMatrix)
+}
+
+SolvingCacheInverseMatrix <- function(x, ...){
+	InvMat <- x$acquireInverseMatrix()
+	If(!is.null(InvMat)){
+		message("cached data processing ...")
+		return(InvMat)
+	}
+	inputdetails <- x$acquire()
+	InvMat <- solve(inputdetails, ...)
+	x$placeInverseMatrix(InvMat)
+	InvMat
+}
