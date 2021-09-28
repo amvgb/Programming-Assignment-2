@@ -1,11 +1,11 @@
-##programming code in caching the inverse matrix##
+##programming code in caching the inverse matrix
 MakeCacheInverseMatrix <- function(x = matrix()){
-	InvMat <- NULL     ##making inverse as null##
+	InvMat <- NULL     ##making inverse as null
 	place <- function(y){
 		x <<- y
 		InvMat <<- NULL
 	}
-	acquire <- function() {x}     ##function for matrix equation##
+	acquire <- function() {x}     ##function for matrix equation
 	placeInverseMatrix <- function(inverse) {InvMat <<- inverse}
 	acquireInverseMatrix <- function() {InvMat}
 	list(place = place,
@@ -14,14 +14,14 @@ MakeCacheInverseMatrix <- function(x = matrix()){
 		acquireInverseMatrix = acquireInverseMatrix)
 }
 
-SolvingCacheInverseMatrix <- function(x, ...){   ##in order to solve cache data##
+SolvingCacheInverseMatrix <- function(x, ...){   ##in order to solve cache data
 	InvMat <- x$acquireInverseMatrix()
-	If(!is.null(InvMat)){     ##to verify if the inverse matrix is null##
+	If(!is.null(InvMat)){     ##to verify if the inverse matrix is null
 		message("cached data processing ...")
-		return(InvMat)   ##going back to the value##
+		return(InvMat)   ##going back to the value
 	}
 	inputdetails <- x$acquire()
-	InvMat <- solve(inputdetails, ...)   ##to solve inverse matrix##
+	InvMat <- solve(inputdetails, ...)   ##to solve inverse matrix
 	x$placeInverseMatrix(InvMat)
 	InvMat
 }
